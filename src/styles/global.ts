@@ -8,6 +8,14 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background-color: ${(({ theme }) => theme.primary)};
+    background-color: #F0F0F0;
+
+    * {
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .mono-bold {
+      font-family: 'Roboto Mono', monospace;
+    }
   }
 `;

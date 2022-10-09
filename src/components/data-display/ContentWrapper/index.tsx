@@ -1,6 +1,7 @@
 import * as S from './styles';
 import { Timer, Scroll } from 'phosphor-react';
 import Logo from '../../../assets/icons/logo.svg'
+import { RouteName } from '../../../constants';
 
 type ContentWrapperProps = {
   activeSection: 'timer' | 'history',
@@ -14,10 +15,10 @@ export const ContentWrapper: React.FC<ContentWrapperProps> = ({ activeSection, c
         <img src={Logo} />
 
         <section>
-          <S.IconBox active={activeSection === 'timer'}>
+          <S.IconBox active={activeSection === 'timer'} to={RouteName.ROOT}>
             <Timer size={24} />
           </S.IconBox>
-          <S.IconBox active={activeSection === 'history'}>
+          <S.IconBox active={activeSection === 'history'} to={RouteName.HISTORY}>
             <Scroll size={24} />
           </S.IconBox>
         </section>

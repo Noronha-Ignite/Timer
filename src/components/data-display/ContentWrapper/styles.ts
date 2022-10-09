@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 export const Container = styled.section`
@@ -37,7 +38,7 @@ const activeIconCss = css`
   color: ${({ theme }) => theme.primary};  
 `;
 
-export const IconBox = styled.div<{ active?: boolean }>`
+export const IconBox = styled(Link)<{ active?: boolean }>`
   padding: 0.25rem;
   box-sizing: border-box;
   position: relative;

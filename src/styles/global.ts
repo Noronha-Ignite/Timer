@@ -13,9 +13,5 @@ export const GlobalStyles = createGlobalStyle`
     * {
       font-family: 'Roboto', sans-serif;
     }
-
-    .mono-bold {
-      font-family: 'Roboto Mono', monospace;
-    }
   }
 `;

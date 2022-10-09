@@ -17,7 +17,7 @@ export const Timer = () => {
           />
           <span>durante</span>
           <TextInput
-            placeholder="-  00  +"
+            placeholder="00"
             inputType="number"
           />
           <span>minutos</span>

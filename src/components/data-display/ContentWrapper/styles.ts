@@ -38,7 +38,7 @@ const activeIconCss = css`
   color: ${({ theme }) => theme.primary};  
 `;
 
-export const IconBox = styled(Link)<{ active?: boolean }>`
+export const IconBox = styled(Link)<{ active: boolean }>`
   padding: 0.25rem;
   box-sizing: border-box;
   position: relative;

@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 
-export const ButtonComponent = styled.button`
+export const ButtonComponent = styled.button<{ variant: 'init' | 'stop' }>`
   width: 100%;
 
   padding: 1rem 2.5rem;
 
   font-size: 1rem;
 
-  background-color: ${({ theme }) => theme.primary};
+  background-color: ${({ theme, variant }) => 
+    variant === 'init' 
+      ? theme.primary
+      : theme.danger
+  };
   border: 0;
   border-radius: 8px;
 
@@ -22,11 +26,19 @@ export const ButtonComponent = styled.button`
   transition: background-color .2s;
 
   &:hover {
-    background-color: ${({ theme }) => theme.primaryDark};
+    background-color: ${({ theme, variant }) => 
+      variant === 'init' 
+        ? theme.primaryDark
+        : theme.dangerDark
+    };
   }
 
   &:disabled {
-    background-color: ${({ theme }) => theme.primaryDark};
+    background-color: ${({ theme, variant }) => 
+      variant === 'init' 
+        ? theme.primaryDark
+        : theme.dangerDark
+    };
     pointer-events: none;
 
     * {

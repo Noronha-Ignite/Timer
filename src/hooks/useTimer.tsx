@@ -1,26 +1,23 @@
+import { nanoid } from "nanoid";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-
-type TimerInfo = {
-  secondsRemaining: number;
-  running: boolean;
-  ended: boolean;
-  title: string;
-}
+import { TimerInfo } from "../models/Timer";
+import { useHistory } from "./useHistory";
 
 type TimerContextProps = {
   handleToggleTimer: () => void;
   setCurrentTimerInfo: (data: Partial<TimerInfo>) => void;
   
   currentTimer: TimerInfo;
-  timerHistory: TimerInfo[];
 }
 
 const TimerContext = createContext({} as TimerContextProps);
 
 export const TimerContextProvider = ({ children }: { children: ReactNode }) => {
+
+  const { insertTimerIntoHistory, updateLastTimer } = useHistory();
   const [timerDecreasingInterval, setTimerDecreasingInterval] = useState<number>();
-  const [timerHistory, setTimerHistory] = useState<TimerInfo[]>([]);
   const [currentTimer, setCurrentTimer] = useState<TimerInfo>({
+    listedInHistory: false,
     ended: false,
     running: false,
     secondsRemaining: 0,
@@ -34,10 +31,24 @@ export const TimerContextProvider = ({ children }: { children: ReactNode }) => {
     }));
   }
   const handleToggleTimer = () => {
-    setCurrentTimer(previous => ({
-      ...previous,
-      running: !previous.running,
-    }));
+    const timer: TimerInfo = {
+      ...currentTimer,
+      listedInHistory: true,
+      running: !currentTimer.running
+    }
+
+    if (!currentTimer.listedInHistory) {
+      insertTimerIntoHistory(timer)
+      setCurrentTimerInfo({
+        listedInHistory: true
+      })
+    }
+
+    updateLastTimer(timer)
+
+    setCurrentTimerInfo({
+      running: !currentTimer.running,
+    });
   }
 
   useEffect(() => {
@@ -63,7 +74,6 @@ export const TimerContextProvider = ({ children }: { children: ReactNode }) => {
         currentTimer,
         setCurrentTimerInfo,
         handleToggleTimer,
-        timerHistory
       }}
     >
       {children}
